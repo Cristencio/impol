@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .header, .footer {
+        text-align: center;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .content {
+        padding: 10px;
+    }
+}

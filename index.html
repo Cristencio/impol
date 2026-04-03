@@ -7,491 +7,310 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "on-secondary-container": "#27308a",
-            "on-secondary": "#ffffff",
-            "surface-container-lowest": "#ffffff",
-            "tertiary": "#003b44",
-            "tertiary-fixed": "#a1efff",
-            "tertiary-container": "#005460",
-            "error-container": "#ffdad6",
-            "on-secondary-fixed": "#000767",
-            "surface-variant": "#e1e3e4",
-            "surface-tint": "#255dad",
-            "secondary-fixed": "#e0e0ff",
-            "on-error-container": "#93000a",
-            "on-primary-fixed-variant": "#00458f",
-            "background": "#f8f9fa",
-            "secondary-container": "#959efd",
-            "surface-container-low": "#f3f4f5",
-            "on-surface-variant": "#424751",
-            "outline": "#737783",
-            "primary-fixed": "#d7e2ff",
-            "primary": "#00346f",
-            "secondary-fixed-dim": "#bdc2ff",
-            "tertiary-fixed-dim": "#44d8f1",
-            "inverse-on-surface": "#f0f1f2",
-            "secondary": "#4c56af",
-            "outline-variant": "#c2c6d3",
-            "on-primary-container": "#9bbdff",
-            "on-error": "#ffffff",
-            "surface-dim": "#d9dadb",
-            "on-secondary-fixed-variant": "#343d96",
-            "surface-container": "#edeeef",
-            "inverse-primary": "#abc7ff",
-            "inverse-surface": "#2e3132",
-            "surface-bright": "#f8f9fa",
-            "on-tertiary": "#ffffff",
-            "on-primary": "#ffffff",
-            "primary-fixed-dim": "#abc7ff",
-            "surface-container-highest": "#e1e3e4",
-            "on-tertiary-fixed-variant": "#004e59",
-            "on-tertiary-fixed": "#001f25",
-            "on-tertiary-container": "#34cee6",
-            "error": "#ba1a1a",
-            "primary-container": "#004a99",
-            "on-primary-fixed": "#001b3f",
-            "on-background": "#191c1d",
-            "surface": "#f8f9fa",
-            "surface-container-high": "#e7e8e9",
-            "on-surface": "#191c1d"
-          },
-          fontFamily: {
-            "headline": ["Manrope"],
-            "body": ["Inter"],
-            "label": ["Inter"]
-          },
-          borderRadius: {
-            DEFAULT: "0.125rem",
-            lg: "0.25rem",
-            xl: "0.5rem",
-            full: "0.75rem"
-          },
-        },
-      },
-    }
-  </script>
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .hero-gradient {
-      background: linear-gradient(135deg, #00346f 0%, #004a99 100%);
-    }
-    /* transições suaves para o menu lateral */
-    .menu-transition {
-      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.2s ease;
-    }
-    .backdrop-transition {
-      transition: opacity 0.2s ease;
-    }
-    body.menu-open {
-      overflow: hidden;
-    }
   </style>
 </head>
 <body class="bg-background text-on-surface font-body">
-  <!-- Mobile Navigation (barra fixa) -->
-  <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm">
+
+  <!-- Mobile Navigation (visível apenas em mobile) -->
+  <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm mobile-only">
     <div class="flex justify-between items-center px-6 py-4">
       <div class="text-xl font-bold tracking-tighter text-sky-900 font-headline">IMPOL</div>
-      <div class="flex items-center gap-4">
-        <!-- Botão hambúrguer com ID para funcionalidade -->
-        <button id="menuHamburgerBtn" class="text-primary p-2 focus:outline-none active:scale-95 transition-transform" aria-label="Menu principal">
-          <span class="material-symbols-outlined text-3xl">menu</span>
-        </button>
+      <button id="menuPopoverBtn" class="text-primary p-2 focus:outline-none active:scale-95 transition-transform" aria-label="Menu principal">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu flutuante mobile (popover elegante) -->
+  <div id="mobileMenuPopover" class="fixed top-20 right-4 z-50 w-64 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-100 menu-popover hidden overflow-hidden">
+    <div class="py-3">
+      <a href="index.html" class="flex items-center gap-3 px-5 py-3 text-on-surface hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">home</span>
+        <span class="font-medium">Início</span>
+      </a>
+      <a href="cursos.html" class="flex items-center gap-3 px-5 py-3 text-on-surface hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">school</span>
+        <span class="font-medium">Cursos</span>
+      </a>
+      <a href="sobre.html" class="flex items-center gap-3 px-5 py-3 text-on-surface hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-primary text-xl">info</span>
+        <span class="font-medium">Sobre</span>
+      </a>
+      <div class="border-t border-slate-100 my-2"></div>
+      <a href="#contactos" class="flex items-center gap-3 px-5 py-3 text-primary font-medium hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-xl">call</span>
+        <span>Contactos</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Desktop Navigation (visível apenas em desktop) -->
+  <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm desktop-nav">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex justify-between items-center py-5">
+        <div class="text-2xl font-bold tracking-tighter text-sky-900 font-headline border-r-2 border-slate-200 pr-6">IMPOL</div>
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-on-surface font-medium hover:text-primary transition-colors">Início</a>
+          <a href="cursos.html" class="text-on-surface font-medium hover:text-primary transition-colors">Cursos</a>
+          <a href="sobre.html" class="text-on-surface font-medium hover:text-primary transition-colors">Sobre</a>
+          <a href="#contactos" class="bg-primary text-white px-5 py-2 rounded-md font-medium text-sm hover:bg-primary/90 transition-colors shadow-sm">Contactos</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- Menu lateral (drawer) + backdrop -->
-  <div id="menuBackdrop" class="fixed inset-0 bg-black/50 z-40 opacity-0 invisible backdrop-transition pointer-events-none"></div>
-  <div id="sideDrawer" class="fixed top-0 left-0 bottom-0 w-72 bg-white z-50 shadow-2xl transform -translate-x-full menu-transition flex flex-col">
-    <div class="flex justify-between items-center p-5 border-b border-slate-100">
-      <span class="text-primary font-headline font-bold text-xl tracking-tight">Navegação</span>
-      <button id="closeDrawerBtn" class="text-on-surface-variant hover:text-primary p-1 rounded-full transition-colors">
-        <span class="material-symbols-outlined text-2xl">close</span>
-      </button>
-    </div>
-    <div class="flex-1 py-6 px-4">
-      <ul class="space-y-6">
-        <!-- Início - index.html -->
-        <li>
-          <a href="index.html" class="menu-link flex items-center gap-4 text-on-surface text-base font-medium py-2 px-3 rounded-lg hover:bg-primary/5 transition-colors group">
-            <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-105 transition-transform">home</span>
-            <span>Início</span>
-          </a>
-        </li>
-        <!-- Cursos - curso.html -->
-        <li>
-          <a href="cursos.html" class="menu-link flex items-center gap-4 text-on-surface text-base font-medium py-2 px-3 rounded-lg hover:bg-primary/5 transition-colors group">
-            <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-105 transition-transform">school</span>
-            <span>Cursos</span>
-          </a>
-        </li>
-        <!-- Sobre - sobre.html -->
-        <li>
-          <a href="sobre.html" class="menu-link flex items-center gap-4 text-on-surface text-base font-medium py-2 px-3 rounded-lg hover:bg-primary/5 transition-colors group">
-            <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-105 transition-transform">info</span>
-            <span>Sobre</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="p-5 border-t border-slate-100 text-xs text-slate-400">
-      <p class="text-center">Instituto Médio Politécnico Limpopo</p>
-    </div>
-  </div>
-
   <!-- Hero Section -->
-  <header class="relative pt-24 pb-12 overflow-hidden px-6">
-    <div class="z-10 relative">
-      <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold uppercase tracking-widest rounded-sm mb-4">
-        Inscrições Abertas 2026
-      </span>
-      <h1 class="font-headline text-4xl font-extrabold text-primary leading-tight mb-6">
-        Excelência em Formação <span class="text-tertiary">Profissional</span>
-      </h1>
-      <p class="text-on-surface-variant text-base mb-8 leading-relaxed">
-        Prepare-se para o mercado com ensino técnico de elite no Instituto Médio Politécnico Limpopo. Campus próprio e infraestrutura moderna em Xai-Xai.
-      </p>
-      <a class="hero-gradient text-on-primary px-8 py-4 rounded-md font-label font-bold text-xs uppercase tracking-widest shadow-lg flex items-center justify-center gap-2 mb-12" href="#todos-cursos">
-        Inscrições 2026
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </a>
-    </div>
-    <div class="relative">
-      <div class="relative z-10 rounded-xl overflow-hidden shadow-xl aspect-square">
-        <img class="w-full h-full object-cover" alt="Estudante em ambiente académico moderno" src="sal.jpg">
+  <header class="relative pt-28 pb-16 overflow-hidden px-4 md:px-8 lg:px-0">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-12">
+        <div class="lg:w-1/2 z-10 relative mb-12 lg:mb-0">
+          <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold uppercase tracking-widest rounded-sm mb-4">
+            Inscrições Abertas 2026
+          </span>
+          <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary leading-tight mb-6">
+            Excelência em Formação <span class="text-tertiary">Profissional</span>
+          </h1>
+          <p class="text-on-surface-variant text-base md:text-lg mb-8 leading-relaxed max-w-xl">
+            Prepare-se para o mercado com ensino técnico de elite no Instituto Médio Politécnico Limpopo. Campus próprio e infraestrutura moderna em Xai-Xai.
+          </p>
+          <a class="hero-gradient inline-flex text-on-primary px-8 py-4 rounded-md font-label font-bold text-xs uppercase tracking-widest shadow-lg items-center gap-2 transition-all" href="#todos-cursos">
+            Inscrições 2026
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+        <div class="lg:w-1/2 relative">
+          <div class="relative z-10 rounded-xl overflow-hidden shadow-xl aspect-square lg:aspect-video">
+            <img class="w-full h-full object-cover" alt="Estudante em ambiente académico moderno" src="sal.jpg">
+          </div>
+          <div class="absolute -bottom-4 -left-4 w-40 h-40 bg-tertiary-fixed rounded-full -z-10 opacity-40"></div>
+        </div>
       </div>
-      <div class="absolute -bottom-4 -left-4 w-40 h-40 bg-tertiary-fixed rounded-full -z-10 opacity-40"></div>
     </div>
   </header>
 
   <!-- Sobre Nós / Infraestrutura Section -->
-  <section class="py-16 bg-surface-container-low" id="sobre">
-    <div class="px-6">
-      <h2 class="font-headline text-[10px] font-bold text-tertiary uppercase tracking-[0.3em] mb-3">A Nossa Instituição</h2>
-      <h3 class="font-headline text-3xl font-extrabold text-primary mb-6 leading-tight">Excelência no Coração de Gaza</h3>
-      <p class="text-on-surface-variant text-sm leading-relaxed mb-10">
-        O <strong>Instituto Médio Politécnico Limpopo (IMPOL)</strong> é uma instituição de ensino técnico-profissional privada localizada na cidade de Xai-Xai, província de Gaza, em Moçambique.
-      </p>
-
-      <!-- Cards reorganizados: ícone à esquerda, info central, número à direita -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
-        <!-- Sala de Aula -->
-        <div class="bg-white p-3 rounded-xl shadow-md flex items-center justify-between gap-2">
-          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">meeting_room</span>
-          </div>
-          <div class="flex-1 text-center">
-            <p class="text-[10px] font-bold uppercase tracking-tighter text-on-surface">Salas de Aula</p>
-            <p class="text-[8px] text-on-surface-variant">Climatizadas</p>
-          </div>
-          <div class="font-headline text-2xl font-bold text-primary">18</div>
-        </div>
-        <!-- Laboratórios -->
-        <div class="bg-white p-3 rounded-xl shadow-md flex items-center justify-between gap-2">
-          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">science</span>
-          </div>
-          <div class="flex-1 text-center">
-            <p class="text-[10px] font-bold uppercase tracking-tighter text-on-surface">Laboratórios</p>
-            <p class="text-[8px] text-on-surface-variant">Especializados</p>
-          </div>
-          <div class="font-headline text-2xl font-bold text-primary">6</div>
-        </div>
-        <!-- Salão de Eventos -->
-        <div class="bg-white p-3 rounded-xl shadow-md flex items-center justify-between gap-2">
-          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">event</span>
-          </div>
-          <div class="flex-1 text-center">
-            <p class="text-[10px] font-bold uppercase tracking-tighter text-on-surface">Salão de Eventos</p>
-            <p class="text-[8px] text-on-surface-variant">Capacidade 300</p>
-          </div>
-          <div class="font-headline text-2xl font-bold text-primary">—</div>
-        </div>
-      </div>
-
-      <h4 class="font-bold text-on-surface text-sm">Infraestrutura Completa</h4>
-      <p class="text-xs text-on-surface-variant">Contamos com laboratórios especializados, biblioteca, salão de eventos e pavilhão desportivo.</p>
-
-      <div class="flex gap-4 mt-6">
-        <span class="material-symbols-outlined text-tertiary shrink-0" data-weight="fill">verified</span>
+  <section class="py-16 md:py-24 bg-surface-container-low" id="sobre">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div>
-          <h4 class="font-bold text-on-surface text-sm">Missão</h4>
-          <p class="text-xs text-on-surface-variant">Formar profissionais competentes e éticos para impulsionar a economia regional e nacional.</p>
+          <h2 class="font-headline text-[10px] font-bold text-tertiary uppercase tracking-[0.3em] mb-3">A Nossa Instituição</h2>
+          <h3 class="font-headline text-3xl md:text-4xl font-extrabold text-primary mb-6 leading-tight">Excelência no Coração de Gaza</h3>
+          <p class="text-on-surface-variant text-base leading-relaxed mb-10">
+            O <strong>Instituto Médio Politécnico Limpopo (IMPOL)</strong> é uma instituição de ensino técnico-profissional privada localizada na cidade de Xai-Xai, província de Gaza, em Moçambique.
+          </p>
+          <div class="space-y-4">
+            <div class="flex gap-4">
+              <span class="material-symbols-outlined text-tertiary shrink-0 text-2xl">verified</span>
+              <div>
+                <h4 class="font-bold text-on-surface text-base">Missão</h4>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Formar profissionais competentes e éticos para impulsionar a economia regional e nacional.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <span class="material-symbols-outlined text-tertiary shrink-0 text-2xl">visibility</span>
+              <div>
+                <h4 class="font-bold text-on-surface text-base">Visão</h4>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Ser referência em formação técnico-profissional em Moçambique até 2030.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="stat-card bg-white p-5 rounded-xl shadow-md text-center">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">meeting_room</span>
+              </div>
+              <p class="font-headline text-3xl font-bold text-primary">18</p>
+              <p class="text-sm font-semibold text-on-surface mt-1">Salas de Aula</p>
+              <p class="text-xs text-on-surface-variant">Climatizadas</p>
+            </div>
+            <div class="stat-card bg-white p-5 rounded-xl shadow-md text-center">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">science</span>
+              </div>
+              <p class="font-headline text-3xl font-bold text-primary">6</p>
+              <p class="text-sm font-semibold text-on-surface mt-1">Laboratórios</p>
+              <p class="text-xs text-on-surface-variant">Especializados</p>
+            </div>
+            <div class="stat-card bg-white p-5 rounded-xl shadow-md text-center">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span class="material-symbols-outlined text-primary text-3xl">event</span>
+              </div>
+              <p class="font-headline text-3xl font-bold text-primary">300</p>
+              <p class="text-sm font-semibold text-on-surface mt-1">Eventos</p>
+              <p class="text-xs text-on-surface-variant">Capacidade do Salão</p>
+            </div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-md">
+            <h4 class="font-bold text-on-surface text-base mb-2">Infraestrutura Completa</h4>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Contamos com laboratórios especializados, biblioteca física e digital, salão de eventos para 300 pessoas e pavilhão desportivo multi-uso.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Diferenciais Section -->
-  <section class="py-16 bg-white px-6">
-    <div class="text-center mb-12">
-      <h2 class="font-headline text-3xl font-extrabold text-primary mb-4">Diferenciais IMPOL</h2>
-      <p class="text-on-surface-variant text-sm">Unimos infraestrutura de ponta a um corpo docente qualificado.</p>
-    </div>
-    <div class="space-y-4">
-      <div class="p-6 bg-surface-container-low rounded-xl flex items-start gap-4">
-        <div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-primary text-xl" data-weight="fill">apartment</span>
-        </div>
-        <div>
-          <h4 class="font-headline font-bold text-primary mb-1">Campus Próprio</h4>
-          <p class="text-xs text-on-surface-variant leading-relaxed">Ambiente desenhado especificamente para o ensino técnico.</p>
-        </div>
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-primary mb-4">Diferenciais IMPOL</h2>
+        <p class="text-on-surface-variant text-base max-w-2xl mx-auto">Unimos infraestrutura de ponta a um corpo docente qualificado para formar os melhores profissionais do mercado.</p>
       </div>
-      <div class="p-6 bg-surface-container-low rounded-xl flex items-start gap-4">
-        <div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-primary text-xl" data-weight="fill">menu_book</span>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="course-card p-6 md:p-8 bg-surface-container-low rounded-xl">
+          <div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-primary text-3xl">apartment</span>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-xl mb-2">Campus Próprio</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Ambiente desenhado especificamente para o ensino técnico, com todas as comodidades necessárias.</p>
         </div>
-        <div>
-          <h4 class="font-headline font-bold text-primary mb-1">Foco Académico</h4>
-          <p class="text-xs text-on-surface-variant leading-relaxed">Biblioteca física e digital para suporte à investigação.</p>
+        <div class="course-card p-6 md:p-8 bg-surface-container-low rounded-xl">
+          <div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-xl mb-2">Foco Académico</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Biblioteca física e digital com acervo atualizado para suporte à investigação e estudos.</p>
         </div>
-      </div>
-      <div class="p-6 bg-surface-container-low rounded-xl flex items-start gap-4">
-        <div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-primary text-xl" data-weight="fill">sports_basketball</span>
-        </div>
-        <div>
-          <h4 class="font-headline font-bold text-primary mb-1">Formação Integral</h4>
-          <p class="text-xs text-on-surface-variant leading-relaxed">Pavilhão desportivo para bem-estar da comunidade.</p>
+        <div class="course-card p-6 md:p-8 bg-surface-container-low rounded-xl">
+          <div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-primary text-3xl">sports_basketball</span>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-xl mb-2">Formação Integral</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Pavilhão desportivo para promover saúde e bem-estar de toda a comunidade académica.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Áreas de Estudo Preview (mantido intacto) -->
-  <section class="py-16 bg-surface-container-lowest" id="cursos-preview">
-    <div class="px-6">
-      <div class="mb-8">
+  <!-- Áreas de Estudo -->
+  <section class="py-16 md:py-24 bg-surface-container-lowest" id="cursos-preview">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-12 md:mb-16">
         <h2 class="font-headline text-[10px] font-bold text-tertiary uppercase tracking-[0.3em] mb-2">Nossas Faculdades</h2>
-        <h3 class="font-headline text-3xl font-extrabold text-primary">Explore Nossas Áreas</h3>
+        <h3 class="font-headline text-3xl md:text-4xl font-extrabold text-primary">Explore Nossas Áreas de Formação</h3>
+        <p class="text-on-surface-variant mt-4 max-w-2xl mx-auto">Cursos técnicos profissionalizantes com alta empregabilidade</p>
       </div>
-      <div class="space-y-6">
-        <!-- Saúde -->
-        <div class="relative overflow-hidden aspect-video rounded-xl shadow-lg">
-          <img class="w-full h-full object-cover" alt="Profissionais de saúde" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzFrz6wbeDBqtXXcUxabncawYaebNZJ7G5BR80B62JZwb2N3KAYr35pjeu3U4GQd44JDcezYEqBs9m13jEubXElQY6X4KkplWa-f7AgCkLQf6efRKKiB4LWTKlR0JZFto6RvDPMS9YJ_PMhTQRsKaJwG2VTBa7s-rYm0kmRnaoeBxkD5j66myux2HqWbMyb0mXplwX3_BaqQVWjNZhAfsZwbhGb6xkJTCiUlD6uv9kqxv4hYV-nd2iAthY0vFLsUlWSmuCEWtlTnQ">
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent flex flex-col justify-end p-6">
-            <span class="inline-block px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[8px] font-bold uppercase tracking-widest rounded-sm mb-2 w-fit">Destaque</span>
-            <h4 class="text-white font-headline text-xl font-bold">Saúde</h4>
-            <p class="text-white/90 text-[10px] mt-1">Enfermagem Geral, Farmácia, Técnicos de Medicina Geral e Saúde Materno Infantil.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+          <img class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110" alt="Profissionais de saúde" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzFrz6wbeDBqtXXcUxabncawYaebNZJ7G5BR80B62JZwb2N3KAYr35pjeu3U4GQd44JDcezYEqBs9m13jEubXElQY6X4KkplWa-f7AgCkLQf6efRKKiB4LWTKlR0JZFto6RvDPMS9YJ_PMhTQRsKaJwG2VTBa7s-rYm0kmRnaoeBxkD5j66myux2HqWbMyb0mXplwX3_BaqQVWjNZhAfsZwbhGb6xkJTCiUlD6uv9kqxv4hYV-nd2iAthY0vFLsUlWSmuCEWtlTnQ">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/50 to-transparent flex flex-col justify-end p-8">
+            <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold uppercase tracking-widest rounded-sm mb-3 w-fit">Área em Destaque</span>
+            <h4 class="text-white font-headline text-3xl font-bold">Saúde</h4>
+            <p class="text-white/90 text-sm mt-2 max-w-md">Enfermagem Geral, Farmácia, Técnicos de Medicina Geral e Saúde Materno Infantil.</p>
           </div>
         </div>
-        <!-- Gestão -->
-        <div class="relative overflow-hidden aspect-video rounded-xl shadow-lg">
-          <img class="w-full h-full object-cover" alt="Ambiente de gestão" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfOLFHhNtR53IaD4A2msqVI0Z22uj8KlLz4N1BVcN8tALCXx-CUISM5MgulQPsoqJm5lPouFWxncqJMHbi-es14I_epgkj2ho94UM7fULfhg3prubPBRxmm_qCBhvdYe7hEw1V2voP7R2Pnzj85pnsL08pX2hoG1bSXOOrLWUgwEMj9zl21J-_g8HLFtE83_osy_fa0JdMz0xmllkyNDaizXBX015WWJs3TGnopYYufaXMdmPBV7pqMOVdVVpjazvFphpNd6kYun_6">
-          <div class="absolute inset-0 bg-gradient-to-t from-tertiary/95 via-tertiary/30 to-transparent flex flex-col justify-end p-6">
-            <span class="inline-block px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[8px] font-bold uppercase tracking-widest rounded-sm mb-2 w-fit">Destaque</span>
-            <h4 class="text-white font-headline text-xl font-bold">Gestão & Indústria</h4>
-            <p class="text-white/90 text-[10px] mt-1">Contabilidade, Gestão, Electricidade Industrial e Agro-Pecuária.</p>
+        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+          <img class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110" alt="Ambiente de gestão" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfOLFHhNtR53IaD4A2msqVI0Z22uj8KlLz4N1BVcN8tALCXx-CUISM5MgulQPsoqJm5lPouFWxncqJMHbi-es14I_epgkj2ho94UM7fULfhg3prubPBRxmm_qCBhvdYe7hEw1V2voP7R2Pnzj85pnsL08pX2hoG1bSXOOrLWUgwEMj9zl21J-_g8HLFtE83_osy_fa0JdMz0xmllkyNDaizXBX015WWJs3TGnopYYufaXMdmPBV7pqMOVdVVpjazvFphpNd6kYun_6">
+          <div class="absolute inset-0 bg-gradient-to-t from-tertiary/95 via-tertiary/50 to-transparent flex flex-col justify-end p-8">
+            <span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed text-xs font-bold uppercase tracking-widest rounded-sm mb-3 w-fit">Área em Destaque</span>
+            <h4 class="text-white font-headline text-3xl font-bold">Gestão & Indústria</h4>
+            <p class="text-white/90 text-sm mt-2 max-w-md">Contabilidade, Gestão, Electricidade Industrial e Agro-Pecuária.</p>
           </div>
         </div>
       </div>
-      <a class="mt-8 text-primary font-bold text-xs flex items-center gap-2 justify-center" href="cursos.html">
-        Ver Todos os Cursos
-        <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
-      </a>
+      <div class="text-center mt-10">
+        <a class="inline-flex text-primary font-bold text-sm items-center gap-2 hover:gap-3 transition-all" href="cursos.html">
+          Ver Todos os Cursos
+          <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Contacts Section -->
-  <section class="py-16 bg-surface-container-high px-6" id="contactos">
-    <h2 class="font-headline text-3xl font-extrabold text-primary mb-6">Estamos em Xai-Xai</h2>
-    <p class="text-on-surface-variant text-sm mb-10 leading-relaxed">Visite o nosso campus no Bairro Ndambine 2000 ou contacte-nos.</p>
-    <div class="space-y-6 mb-12">
-      <div class="flex items-start gap-4">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shrink-0 shadow-sm">
-          <span class="material-symbols-outlined text-xl">call</span>
-        </div>
+  <section class="py-16 md:py-24 bg-surface-container-high" id="contactos">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h5 class="font-bold text-on-surface text-sm">Telefone</h5>
-          <p class="text-xs text-on-surface-variant">+258 84 000 0000</p>
+          <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-primary mb-6">Estamos em Xai-Xai</h2>
+          <p class="text-on-surface-variant text-base mb-10 leading-relaxed">Visite o nosso campus no Bairro Ndambine 2000 ou contacte-nos através dos canais abaixo.</p>
+          <div class="space-y-6 mb-8">
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-2xl">call</span>
+              </div>
+              <div>
+                <h5 class="font-bold text-on-surface text-base">Telefone</h5>
+                <p class="text-sm text-on-surface-variant">+258 84 000 0000</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-2xl">mail</span>
+              </div>
+              <div>
+                <h5 class="font-bold text-on-surface text-base">Email</h5>
+                <p class="text-sm text-on-surface-variant">impol@gmail.com</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-2xl">location_on</span>
+              </div>
+              <div>
+                <h5 class="font-bold text-on-surface text-base">Localização</h5>
+                <p class="text-sm text-on-surface-variant">Ndambine 2000, Xai-Xai, Gaza, Moçambique</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="flex items-start gap-4">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shrink-0 shadow-sm">
-          <span class="material-symbols-outlined text-xl">mail</span>
+        <div class="rounded-2xl overflow-hidden shadow-xl relative">
+          <img class="w-full h-96 object-cover" alt="Vista do campus" src="inst.jpg">
+          <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur px-4 py-3 rounded-lg shadow text-sm font-semibold text-primary text-center">
+            📍 Campus Bairro 7 Ndambine 2000, Xai-Xai
+          </div>
         </div>
-        <div>
-          <h5 class="font-bold text-on-surface text-sm">Email</h5>
-          <p class="text-xs text-on-surface-variant">impol@gmail.com</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-4">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shrink-0 shadow-sm">
-          <span class="material-symbols-outlined text-xl">location_on</span>
-        </div>
-        <div>
-          <h5 class="font-bold text-on-surface text-sm">Localização</h5>
-          <p class="text-xs text-on-surface-variant">Ndambine 2000, Xai-Xai, Gaza</p>
-        </div>
-      </div>
-    </div>
-    <div class="rounded-2xl overflow-hidden aspect-video shadow-lg relative">
-      <img class="w-full h-full object-cover grayscale" alt="Vista do campus" src="inst.jpg">
-      <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded shadow text-[10px] font-bold text-primary">
-        Campus Bairro 7 Ndambine 2000, Xai-xai
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="pt-12 pb-24 px-6 bg-slate-50 border-t border-slate-100">
-    <div class="text-xl font-bold text-sky-900 mb-6">IMPOL</div>
-    <p class="text-slate-500 text-xs mb-8">Excelência em educação técnica com infraestrutura internacional em Moçambique.</p>
-    <div class="grid grid-cols-2 gap-8 mb-12">
-      <div>
-        <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-[10px]">Instituição</h5>
-        <ul class="space-y-3 text-xs text-slate-500">
-          <li><a href="#sobre">Sobre Nós</a></li>
-          <li><a href="#todos-cursos">Cursos</a></li>
-        </ul>
+  <footer class="pt-16 pb-8 bg-slate-50 border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div class="md:col-span-1">
+          <div class="text-2xl font-bold text-sky-900 mb-4 font-headline">IMPOL</div>
+          <p class="text-slate-500 text-sm leading-relaxed">Excelência em educação técnica com infraestrutura internacional em Moçambique.</p>
+        </div>
+        <div>
+          <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-xs">Instituição</h5>
+          <ul class="space-y-2 text-sm text-slate-500">
+            <li><a href="#sobre" class="hover:text-primary transition-colors">Sobre Nós</a></li>
+            <li><a href="#cursos-preview" class="hover:text-primary transition-colors">Cursos</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors">Corpo Docente</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-xs">Suporte</h5>
+          <ul class="space-y-2 text-sm text-slate-500">
+            <li><a href="#contactos" class="hover:text-primary transition-colors">Contactos</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors">Termos e Condições</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-xs">Informativo</h5>
+          <p class="text-sm text-slate-500 mb-3">Receba novidades e informações sobre inscrições.</p>
+          <div class="flex gap-2">
+            <input class="bg-white border-slate-200 rounded-md px-4 py-2 w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Seu email" type="email">
+            <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+              <span class="material-symbols-outlined text-sm">send</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-[10px]">Suporte</h5>
-        <ul class="space-y-3 text-xs text-slate-500">
-          <li><a href="#contactos">Contactos</a></li>
-          <li><a href="#">Termos</a></li>
-        </ul>
+      <div class="pt-8 border-t border-slate-200 text-center text-slate-400 text-xs">
+        © 2024 Instituto Médio Politécnico Limpopo (IMPOL). Campus: Xai-Xai, Moçambique. Todos os direitos reservados.
       </div>
-    </div>
-    <div class="mb-12">
-      <h5 class="font-bold text-sky-900 mb-4 uppercase tracking-widest text-[10px]">Informativo</h5>
-      <div class="flex gap-2">
-        <input class="bg-white border-slate-200 rounded-md px-3 py-2 w-full text-xs" placeholder="Seu email" type="email">
-        <button class="bg-primary text-white p-2 rounded-md">
-          <span class="material-symbols-outlined text-sm">send</span>
-        </button>
-      </div>
-    </div>
-    <div class="pt-8 border-t border-slate-200 text-center text-slate-400 text-[10px]">
-      © 2024 Instituto Médio Politécnico Limpopo (IMPOL). Campus: Xai-Xai. Todos os direitos reservados.
     </div>
   </footer>
 
-  <!-- Script para funcionamento do menu hambúrguer com Início, Cursos e Sobre -->
-  <script>
-    (function() {
-      // Elementos do DOM
-      const hamburgerBtn = document.getElementById('menuHamburgerBtn');
-      const sideDrawer = document.getElementById('sideDrawer');
-      const backdrop = document.getElementById('menuBackdrop');
-      const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-      const menuLinks = document.querySelectorAll('.menu-link');
-      
-      // Ícone do botão hambúrguer (para alterar visual opcional)
-      const menuIconSpan = hamburgerBtn?.querySelector('.material-symbols-outlined');
-      
-      let isMenuOpen = false;
-      
-      // Função para abrir o menu
-      function openMenu() {
-        if (!sideDrawer || !backdrop) return;
-        // Aplica classes para exibir drawer e backdrop
-        sideDrawer.classList.remove('-translate-x-full');
-        sideDrawer.classList.add('translate-x-0');
-        backdrop.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
-        backdrop.classList.add('opacity-100', 'visible', 'pointer-events-auto');
-        document.body.classList.add('menu-open');
-        isMenuOpen = true;
-        // (Opcional) Trocar ícone para "close" no botão
-        if (menuIconSpan) {
-          menuIconSpan.textContent = 'close';
-        }
-        // Adiciona atributo aria
-        hamburgerBtn?.setAttribute('aria-expanded', 'true');
-      }
-      
-      // Função para fechar o menu
-      function closeMenu() {
-        if (!sideDrawer || !backdrop) return;
-        sideDrawer.classList.add('-translate-x-full');
-        sideDrawer.classList.remove('translate-x-0');
-        backdrop.classList.add('invisible', 'opacity-0', 'pointer-events-none');
-        backdrop.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
-        document.body.classList.remove('menu-open');
-        isMenuOpen = false;
-        if (menuIconSpan) {
-          menuIconSpan.textContent = 'menu';
-        }
-        hamburgerBtn?.setAttribute('aria-expanded', 'false');
-      }
-      
-      // Alterna menu
-      function toggleMenu() {
-        if (isMenuOpen) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      }
-      
-      // Event listeners
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', toggleMenu);
-      }
-      
-      if (closeDrawerBtn) {
-        closeDrawerBtn.addEventListener('click', closeMenu);
-      }
-      
-      if (backdrop) {
-        backdrop.addEventListener('click', closeMenu);
-      }
-      
-      // Fechar menu ao clicar em qualquer link do menu (navegação)
-      if (menuLinks.length) {
-        menuLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            // Permite que o link execute o redirecionamento normalmente
-            // Mas fecha o menu imediatamente para uma melhor experiência
-            closeMenu();
-            // Nenhum preventDefault, pois queremos que navegue para as páginas: index.html, curso.html, sobre.html
-          });
-        });
-      }
-      
-      // Fechar menu ao pressionar a tecla ESC
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isMenuOpen) {
-          closeMenu();
-        }
-      });
-      
-      // Impedir que o clique dentro do drawer feche o menu (o backdrop e o botão close são os responsáveis)
-      if (sideDrawer) {
-        sideDrawer.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
-      }
-      
-      // Garantir que ao redimensionar a janela, se o menu estiver aberto, não cause bugs visuais
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 1024 && isMenuOpen) {
-          // Em desktop a experiência continua, mas mantemos funcional
-          // Apenas para garantir que não haja sobreposição indesejada - não fechamos automaticamente
-        }
-      });
-      
-      // Inicialização: garantir que o drawer está fechado e sem transições pendentes
-      if (sideDrawer && backdrop) {
-        sideDrawer.classList.add('-translate-x-full');
-        sideDrawer.classList.remove('translate-x-0');
-        backdrop.classList.add('invisible', 'opacity-0', 'pointer-events-none');
-        backdrop.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
-        document.body.classList.remove('menu-open');
-        if (menuIconSpan) menuIconSpan.textContent = 'menu';
-      }
-    })();
-  </script>
+  <script src="css/style.js"></script>
+  <!-- Script para menu flutuante mobile -->
+  <script src="js/script.js"></script>
 </body>
 </html>
